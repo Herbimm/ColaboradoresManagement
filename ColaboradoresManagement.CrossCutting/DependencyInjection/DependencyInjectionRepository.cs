@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ColaboradoresManagement.CrossCutting.Utis;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ColaboradoresManagement.CrossCutting.DependencyInjection
 {
     public static class DependencyInjectionRepository
     {
-        public static void AddDependencyInjectionRepository(IServiceCollection services) 
+        public static void AddDependencyInjectionRepository(IServiceCollection services, ConfigurationRepository configurationRepository) 
         { 
 
         }

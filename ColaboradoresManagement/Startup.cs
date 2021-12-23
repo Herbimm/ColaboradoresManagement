@@ -1,4 +1,5 @@
 using AutoMapper;
+using ColaboradoresManagement.CrossCutting.DependencyInjection;
 using ColaboradoresManagement.CrossCutting.Utis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +27,12 @@ namespace ColaboradoresManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigurationRepository configurationRepository =
+                Configuration.GetSection("ConfigurationRepository").Get<ConfigurationRepository>();
+
+            DependencyInjectionService.AddDependecyInjectionService(services);
+            DependencyInjectionRepository.AddDependencyInjectionRepository(services, configurationRepository);
+
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<ColaboradoresManagementAutoMapperProfile>();
