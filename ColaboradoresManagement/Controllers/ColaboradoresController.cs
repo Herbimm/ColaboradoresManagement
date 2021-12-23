@@ -23,7 +23,8 @@ namespace ColaboradoresManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> BuscarColaboradoresAsync()
         {
-            return null;
+            var colaboradores = await _gerenciarColaboradoresService.BuscarColaboradoresAsync();
+            return View("_ListaColaboradores");
         }
 
     }
