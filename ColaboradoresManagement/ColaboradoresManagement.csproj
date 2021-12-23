@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ColaboradoresManagement.CrossCutting\ColaboradoresManagement.CrossCutting.csproj" />
+    <ProjectReference Include="..\ColaboradoresManagement.Domain\ColaboradoresManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>
