@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace ColaboradoresManagement.Repository.Repository
 {
-    public class ColaboradorRepository : IColaboradorRepository
+    public class GerenciarColaboradorRepository : IGerenciarColaboradorRepository
     {
         private readonly MyContext _myContext;
         public DbSet<Colaborador> _dbset { get; }
 
-        public ColaboradorRepository(MyContext myContext)
+        public GerenciarColaboradorRepository(MyContext myContext)
         {
             _myContext = myContext;
             _dbset = myContext.Set<Colaborador>();

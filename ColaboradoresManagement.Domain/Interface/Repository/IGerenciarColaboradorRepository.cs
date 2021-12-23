@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ColaboradoresManagement.Domain.Interface.Repository
 {
-    public interface IColaboradorRepository
+    public interface IGerenciarColaboradorRepository
     {
         Task<IEnumerable<Colaborador>> BuscarColaboradoresAsync();
         Task<Colaborador> BuscarColaboradorPorNomeAsync();

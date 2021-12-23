@@ -1,4 +1,5 @@
-﻿using ColaboradoresManagement.Domain.Interface.Service;
+﻿using ColaboradoresManagement.Domain.Dto;
+using ColaboradoresManagement.Domain.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,23 +10,21 @@ namespace ColaboradoresManagement.Controllers
 {
     public class ColaboradoresController : Controller
     {
-        private readonly IGerenciarColaboradoresService _gerenciarColaboradoresService;
+        private readonly IGerenciarColaboradoresService _colaboradorService;
 
-        public ColaboradoresController(IGerenciarColaboradoresService gerenciarColaboradoresService)
+        public ColaboradoresController(IGerenciarColaboradoresService colaboradorService)
         {
-            _gerenciarColaboradoresService = gerenciarColaboradoresService;
+            _colaboradorService = colaboradorService;
         }
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpGet]
         public async Task<IActionResult> BuscarColaboradoresAsync()
         {
-            var colaboradores = await _gerenciarColaboradoresService.BuscarColaboradoresAsync();
+            var buscarColaboradores = await _colaboradorService.BuscarColaboradoresAsync();
             return View("_ListaColaboradores");
         }
-
     }
 }

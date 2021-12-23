@@ -13,10 +13,10 @@ namespace ColaboradoresManagement.Service.Service
 {
     public class GerenciarColaboradoresService : IGerenciarColaboradoresService
     {
-        private readonly IColaboradorRepository _colaboradorRepository;
+        private readonly IGerenciarColaboradorRepository _colaboradorRepository;
         private readonly IMapper _mapper;
 
-        public GerenciarColaboradoresService(IColaboradorRepository colaboradorRepository,
+        public GerenciarColaboradoresService(IGerenciarColaboradorRepository colaboradorRepository,
             IMapper mapper)
         {
             _colaboradorRepository = colaboradorRepository;
