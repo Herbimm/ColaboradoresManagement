@@ -38,9 +38,8 @@ namespace ColaboradoresManagement
                 cfg.AddProfile<ColaboradoresManagementAutoMapperProfile>();
             });
             IMapper mapper = config.CreateMapper();
-            services.AddSingleton(mapper);
-
-            services.AddControllers();
+            services.AddSingleton(mapper);  
+            
             services.AddSwaggerGen(c =>
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Colaboradores Management", Version = "v1," }));
 
