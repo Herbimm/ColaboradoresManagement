@@ -25,8 +25,8 @@ namespace ColaboradoresManagement.Service.Service
         public async Task<IEnumerable<ColaboradorDto>> BuscarColaboradoresAsync()
         {           
             var buscarColaboradores = await _colaboradorRepository.BuscarColaboradoresAsync();
-            var dtoColaboradores = _mapper.Map<ColaboradorDto>(buscarColaboradores);
-            return (IEnumerable<ColaboradorDto>)dtoColaboradores;
+            var dtoColaboradores = _mapper.Map<IEnumerable<ColaboradorDto>>(buscarColaboradores);
+            return dtoColaboradores;
         }
 
         public Task<Colaborador> BuscarColaboradorPorNomeAsync()

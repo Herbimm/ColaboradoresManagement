@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ColaboradoresManagement.Repository\ColaboradoresManagement.Repository.csproj" />
+    <ProjectReference Include="..\ColaboradoresManagement.Service\ColaboradoresManagement.Service.csproj" />
   </ItemGroup>
 
 </Project>

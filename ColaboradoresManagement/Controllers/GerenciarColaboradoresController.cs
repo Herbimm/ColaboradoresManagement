@@ -19,11 +19,11 @@ namespace ColaboradoresManagement.Controllers
         {
             return View();
         }
-        [HttpGet]
+        [HttpGet("BuscarColaboradores")]              
         public async Task<IActionResult> BuscarColaboradoresAsync()
         {
             var buscarColaboradores = await _colaboradorService.BuscarColaboradoresAsync();
-            return View("");
+            return View("_ListaColaboradores");
         }
     }
 }
