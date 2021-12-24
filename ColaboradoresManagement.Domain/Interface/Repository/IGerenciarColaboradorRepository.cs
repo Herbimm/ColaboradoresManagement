@@ -10,8 +10,8 @@ namespace ColaboradoresManagement.Domain.Interface.Repository
     public interface IGerenciarColaboradorRepository
     {
         Task<IEnumerable<Colaborador>> BuscarColaboradoresAsync();
-        Task<Colaborador> BuscarColaboradorPorNomeAsync();
-        Task<Colaborador> CadastrarColaboradorAsync();
-        Task<Colaborador> RemoverColaboradorAsync();
+        Task<Colaborador> BuscarColaboradorPorNomeAsync(string nome);
+        Task CadastrarColaboradorAsync(Colaborador colaborador);
+        Task RemoverColaboradorAsync(Colaborador colaborador);
     }
 }

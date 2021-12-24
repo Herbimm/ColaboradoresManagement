@@ -23,25 +23,31 @@ namespace ColaboradoresManagement.Service.Service
             _mapper = mapper;
         }
         public async Task<IEnumerable<ColaboradorDto>> BuscarColaboradoresAsync()
-        {           
+        {
             var buscarColaboradores = await _colaboradorRepository.BuscarColaboradoresAsync();
             var dtoColaboradores = _mapper.Map<IEnumerable<ColaboradorDto>>(buscarColaboradores);
             return dtoColaboradores;
         }
 
-        public Task<Colaborador> BuscarColaboradorPorNomeAsync()
+        public async Task<ColaboradorDto> BuscarColaboradorPorNomeAsync(string nome)
         {
-            throw new NotImplementedException();
+            var buscarColaboradorPeloNome = await _colaboradorRepository.BuscarColaboradorPorNomeAsync(nome);
+            var colaborador = _mapper.Map<ColaboradorDto>(buscarColaboradorPeloNome);
+            return colaborador;
         }
 
-        public Task<Colaborador> CadastrarColaboradorAsync()
+        public async Task CadastrarColaboradorAsync(ColaboradorDto colaborador)
         {
-            throw new NotImplementedException();
+            var cadastro = _mapper.Map<Colaborador>(colaborador);
+            cadastro.Id = Guid.NewGuid();
+            await _colaboradorRepository.CadastrarColaboradorAsync(cadastro);
         }
 
-        public Task<Colaborador> RemoverColaboradorAsync()
+        public async Task<string> RemoverColaboradorAsync(string nome)
         {
-            throw new NotImplementedException();
+            var colaborador = await _colaboradorRepository.BuscarColaboradorPorNomeAsync(nome);
+            await _colaboradorRepository.RemoverColaboradorAsync(colaborador);
+            return nome;
         }
     }
 }

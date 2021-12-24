@@ -1,6 +1,7 @@
 ﻿using ColaboradoresManagement.Domain.Entity;
 using ColaboradoresManagement.Domain.Interface.Repository;
 using ColaboradoresManagement.Repository.Context;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,19 +35,47 @@ namespace ColaboradoresManagement.Repository.Repository
             }
                       
         }
-        public Task<Colaborador> BuscarColaboradorPorNomeAsync()
+        public async Task<Colaborador> BuscarColaboradorPorNomeAsync(string nome)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var buscarColaborador = _dbset.FirstOrDefault(c => c.Nome.Contains(nome));
+                return buscarColaborador;
+            }
+            catch (Exception)
+            {
 
-        public Task<Colaborador> CadastrarColaboradorAsync()
-        {
-            throw new NotImplementedException();
-        }
+                throw;
+            }                  
 
-        public Task<Colaborador> RemoverColaboradorAsync()
+        }      
+
+        public async Task RemoverColaboradorAsync(Colaborador colaborador)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbset.Remove(colaborador);
+                await _myContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
+        public async Task CadastrarColaboradorAsync(Colaborador colaborador)
+        {
+            try
+            {
+                var cadastrarColaborador = await _dbset.AddAsync(colaborador);
+                await _myContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }            
         }
     }
 }
