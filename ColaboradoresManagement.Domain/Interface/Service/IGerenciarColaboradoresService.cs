@@ -11,7 +11,7 @@ namespace ColaboradoresManagement.Domain.Interface.Service
     public interface IGerenciarColaboradoresService
     {
         Task<IEnumerable<ColaboradorDto>> BuscarColaboradoresAsync();
-        Task<ColaboradorDto> BuscarColaboradorPorNomeAsync(string nome);
+        Task<IEnumerable<ColaboradorDto>> BuscarColaboradorPorNomeAsync(string nome);
         Task CadastrarColaboradorAsync(ColaboradorDto colaborador);
         Task<string> RemoverColaboradorAsync(string nome);        
     }

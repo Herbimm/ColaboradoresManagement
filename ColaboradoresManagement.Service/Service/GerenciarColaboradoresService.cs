@@ -29,11 +29,16 @@ namespace ColaboradoresManagement.Service.Service
             return dtoColaboradores;
         }
 
-        public async Task<ColaboradorDto> BuscarColaboradorPorNomeAsync(string nome)
+        public async Task<IEnumerable<ColaboradorDto>> BuscarColaboradorPorNomeAsync(string nome)
         {
             var buscarColaboradorPeloNome = await _colaboradorRepository.BuscarColaboradorPorNomeAsync(nome);
+            List<ColaboradorDto> listaColaborador = new List<ColaboradorDto>();
             var colaborador = _mapper.Map<ColaboradorDto>(buscarColaboradorPeloNome);
-            return colaborador;
+            listaColaborador.Add(colaborador);
+
+            IEnumerable<ColaboradorDto> enumerable = listaColaborador as IEnumerable<ColaboradorDto>;
+
+            return enumerable;
         }
 
         public async Task CadastrarColaboradorAsync(ColaboradorDto colaborador)
