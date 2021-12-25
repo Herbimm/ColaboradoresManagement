@@ -63,7 +63,7 @@ namespace ColaboradoresManagement.Controllers
         }
 
         [HttpPost("RemoverColaborador")]
-        public async Task<IActionResult> RemoverColaboradorAsync(string nome)
+        public async Task<IActionResult> RemoverColaboradorAsync([FromBody]string nome)
         {
             try
             {
