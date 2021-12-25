@@ -21,10 +21,17 @@ namespace ColaboradoresManagement.Controllers
         }
         
         [HttpGet("BuscarColaboradores")]
-        public async Task<IEnumerable<ColaboradorDto>> BuscarColaboradoresAsync()
+        public async Task<IActionResult> BuscarColaboradoresAsync()
         {
-            var buscarColaboradores = await _colaboradorService.BuscarColaboradoresAsync();
-            return  buscarColaboradores;
+            try
+            {
+                var buscarColaboradores = await _colaboradorService.BuscarColaboradoresAsync();
+                return Ok(buscarColaboradores);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Nenhum encontrado" + e);
+            }            
         }
 
         [HttpPost("CadastrarColaborador")]
@@ -32,21 +39,29 @@ namespace ColaboradoresManagement.Controllers
         {
             try
             {
-                await _colaboradorService.CadastrarColaboradorAsync(colaborador);
-                TempData["AlertMensage"] = "Cadastro criado com Sucesso";
-                return Ok();
+                await _colaboradorService.CadastrarColaboradorAsync(colaborador);                
+                return Ok("Cadastrado com Sucesso");
             }
             catch (Exception)
             {
-                return PartialView("_CadastradoFalha");
+                return BadRequest("Falha na requisição");
             }
 
         }
         [HttpGet("BuscarColaboradorPorNome")]
         public async Task<IActionResult> BuscarColaboradorPorNomeAsync(string nome)
         {
-            var cadastrarColaborador = await _colaboradorService.BuscarColaboradorPorNomeAsync(nome);
-            return View("ListaColaboradoresPorNome", cadastrarColaborador);
+            try
+            {
+                var cadastrarColaborador = await _colaboradorService.BuscarColaboradorPorNomeAsync(nome);
+                return Ok(cadastrarColaborador);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Nenhum encontrado" + e);
+            }
+            
         }
 
         [HttpPost("RemoverColaborador")]
@@ -54,13 +69,12 @@ namespace ColaboradoresManagement.Controllers
         {
             try
             {
-                await _colaboradorService.RemoverColaboradorAsync(nome);
-                TempData["AlertMensage"] = "Excluido criado com Sucesso";
-                return RedirectToAction("Index");
+                await _colaboradorService.RemoverColaboradorAsync(nome);                
+                return Ok("Excluido criado com Sucesso");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new BadRequestResult();
+                throw new Exception("Colaborador não encontrado");
             }
 
         }

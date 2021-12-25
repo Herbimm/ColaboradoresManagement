@@ -38,32 +38,25 @@ namespace ColaboradoresManagement
                 cfg.AddProfile<ColaboradoresManagementAutoMapperProfile>();
             });
             IMapper mapper = config.CreateMapper();
-            services.AddSingleton(mapper);  
-            
-            services.AddSwaggerGen(c =>
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Colaboradores Management", Version = "v1," }));
+            services.AddSingleton(mapper);
 
-            services.AddControllersWithViews();
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ColaboradoresManagement.API", Version = "v1" });
+            });
+                        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-
-                c.RoutePrefix = string.Empty;
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-            });
-
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ColaboradoresManagement.API v1"));
             }
             app.UseStaticFiles();
 
@@ -73,9 +66,7 @@ namespace ColaboradoresManagement
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }
