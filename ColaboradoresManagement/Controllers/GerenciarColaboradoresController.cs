@@ -22,6 +22,7 @@ namespace ColaboradoresManagement.Controllers
         {
             return View();
         }
+
         [HttpGet("BuscarColaboradores")]              
         public async Task<IActionResult> BuscarColaboradoresAsync()
         {
