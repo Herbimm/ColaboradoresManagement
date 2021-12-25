@@ -8,40 +8,38 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ColaboradoresManagement.Controllers
-{   
+{
+    [Route("GerenciarColaboradores")]
+    [ApiController]
     public class GerenciarColaboradoresController : Controller
     {
-
         private readonly IGerenciarColaboradoresService _colaboradorService;
 
         public GerenciarColaboradoresController(IGerenciarColaboradoresService colaboradorService)
         {
             _colaboradorService = colaboradorService;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
-        [HttpGet("BuscarColaboradores")]              
-        public async Task<IActionResult> BuscarColaboradoresAsync()
+        
+        [HttpGet("BuscarColaboradores")]
+        public async Task<IEnumerable<ColaboradorDto>> BuscarColaboradoresAsync()
         {
             var buscarColaboradores = await _colaboradorService.BuscarColaboradoresAsync();
-            return View("ListaColaboradores", buscarColaboradores);
+            return  buscarColaboradores;
         }
 
         [HttpPost("CadastrarColaborador")]
         public async Task<IActionResult> CadastrarColaboradorAsync(ColaboradorDto colaborador)
         {
             try
-            {                
+            {
                 await _colaboradorService.CadastrarColaboradorAsync(colaborador);
                 TempData["AlertMensage"] = "Cadastro criado com Sucesso";
-                return RedirectToAction("Index");
+                return Ok();
             }
             catch (Exception)
             {
                 return PartialView("_CadastradoFalha");
-            }         
+            }
 
         }
         [HttpGet("BuscarColaboradorPorNome")]
@@ -62,12 +60,10 @@ namespace ColaboradoresManagement.Controllers
             }
             catch (Exception)
             {
+                return new BadRequestResult();
+            }
 
-                return View("Erro");
-            }            
-            
         }
-
 
     }
 }
