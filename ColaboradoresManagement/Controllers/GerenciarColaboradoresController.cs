@@ -1,10 +1,7 @@
 ﻿using ColaboradoresManagement.Domain.Dto;
-using ColaboradoresManagement.Domain.Entity;
 using ColaboradoresManagement.Domain.Interface.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ColaboradoresManagement.Controllers
@@ -48,13 +45,14 @@ namespace ColaboradoresManagement.Controllers
             }
 
         }
-        [HttpGet("BuscarColaboradorPorNome")]
-        public async Task<IActionResult> BuscarColaboradorPorNomeAsync(string nome)
+        [HttpPost("BuscarColaboradorPorNome")]
+        public async Task<IActionResult> BuscarColaboradorPorNomeAsync([FromBody]String nome)
         {
             try
-            {
-                var cadastrarColaborador = await _colaboradorService.BuscarColaboradorPorNomeAsync(nome);
-                return Ok(cadastrarColaborador);
+            {               
+              // var convertJson = JsonConvert.DeserializeObject<ColaboradorDto>(nome);
+               var cadastrarColaborador = await _colaboradorService.BuscarColaboradorPorNomeAsync(nome);
+               return Ok(cadastrarColaborador);
             }
             catch (Exception e)
             {
